@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>새 글 작성</title>
+  <link rel="stylesheet" href="css/board/forumDetail.css">
+  <link rel="stylesheet" href="css/home/home.css">
+  <script type="text/javascript" src="js/common/htmlComRender.js"></script>
+</head>
+<body>
+	<!-- Header -->
+  <div id="header-container"></div>
+  
+  <div class="form-container">
+    <h1>새 글 작성</h1>
+    <form action="/forum" method="post">
+      <!-- 제목 -->
+      <div class="form-group">
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+
+      <!-- 작성자 -->
+      <div class="form-group">
+        <label for="writer">작성자</label>
+        <input type="text" id="writer" name="writer" required>
+      </div>
+
+      <!-- 내용 -->
+      <div class="form-group">
+        <label for="content">내용</label>
+        <textarea id="content" name="content" rows="15" required></textarea>
+      </div>
+
+      <!-- 버튼들 -->
+      <div class="form-actions">
+        <button type="submit" class="submit-btn">작성 완료</button>
+        <button type="reset" class="reset-btn">초기화</button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Footer -->
+  <div id="footer-container"></div>
+</body>
+</html>

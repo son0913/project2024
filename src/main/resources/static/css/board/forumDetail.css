@@ -1,0 +1,75 @@
+/* 기본 스타일 */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.form-container {
+  width: 50%;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* 버튼 스타일 */
+.form-actions {
+  text-align: right;
+}
+
+.submit-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #218838;
+}
+
+.reset-btn {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background-color: #c82333;
+}
