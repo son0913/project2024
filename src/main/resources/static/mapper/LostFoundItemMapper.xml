@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moon.mProject.api.mapper.LostFoundItemMapper">
+
+	<resultMap type="com.moon.mProject.api.vo.LostFoundItemVO" id="lostFoundItemVO">
+		<result column="no" property="no"/>
+		<result column="lost_mng_no" property="lost_mng_no"/>
+		<result column="lost_stts" property="lost_stts"/>
+		<result column="reg_ymd" property="reg_ymd"/>
+		<result column="rcv_ymd" property="rcv_ymd"/>
+		<result column="lgs_dtl_cn" property="lgs_dtl_cn"/>
+		<result column="cstd_plc" property="cstd_plc"/>
+		<result column="lost_rgtr_id" property="lost_rgtr_id"/>
+		<result column="lost_nm" property="lost_nm"/>
+		<result column="lost_knd" property="lost_knd"/>
+		<result column="rcpl" property="rcpl"/>
+		<result column="inq_cnt" property="inq_cnt"/>
+	</resultMap>
+	
+	<select id="selectLostFoundItem" resultMap="lostFoundItemVO">
+		SELECT * FROM lostFoundItem ORDER BY reg_ymd DESC
+	</select>
+
+	<insert id="insertLostFoundItem" parameterType="HashMap">
+		INSERT INTO lostFoundItem(
+			LOST_MNG_NO, LOST_STTS,
+			<if test="REG_YMD != null and !''.equals(REG_YMD)">
+			REG_YMD, 
+			</if>
+			<if test="RCV_YMD != null and !''.equals(RCV_YMD)">
+			RCV_YMD, 
+			</if>
+			LGS_DTL_CN, CSTD_PLC, LOST_RGTR_ID, LOST_NM, LOST_KND, RCPL, INQ_CNT
+		) VALUES(
+			#{LOST_MNG_NO, jdbcType = INTEGER}, #{LOST_STTS, jdbcType = VARCHAR}, 
+			<if test="REG_YMD != null and !''.equals(REG_YMD)">
+			#{REG_YMD, jdbcType = DATE}, 
+			</if>
+			<if test="RCV_YMD != null and !''.equals(RCV_YMD)">
+			#{RCV_YMD, jdbcType = DATE}, 
+			</if>
+			#{LGS_DTL_CN, jdbcType = VARCHAR},#{CSTD_PLC, jdbcType = VARCHAR}, #{LOST_RGTR_ID, jdbcType = VARCHAR}, 
+			#{LOST_NM, jdbcType = VARCHAR}, #{LOST_KND, jdbcType = VARCHAR}, #{RCPL, jdbcType = VARCHAR}, #{INQ_CNT, jdbcType = VARCHAR} 
+		)
+	</insert>
+	
+	<delete id="deleteLostFoundItem">
+		DELETE FROM lostFoundItem
+	</delete>
+
+</mapper>

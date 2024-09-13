@@ -34,7 +34,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
@@ -42,18 +42,64 @@
 		    <version>3.3.3</version>
 		</dependency>
 		
+		
+		<!-- https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter -->
+		<dependency>
+		    <groupId>org.mybatis.spring.boot</groupId>
+		    <artifactId>mybatis-spring-boot-starter</artifactId>
+		    <version>3.0.3</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>3.0.3</version>
+		</dependency>
+
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>6.1.10</version>
+		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>8.0.32</version>
 		</dependency>
-
+		
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.30</version>
+		    <scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-quartz</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.14.0</version> <!-- 최신 버전을 사용하세요 -->
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version></dependency>
+
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -67,6 +113,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+					<includeSystemScope>true</includeSystemScope>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>

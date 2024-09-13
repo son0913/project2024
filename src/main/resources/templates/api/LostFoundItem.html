@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>서울시 대중교통 분실물 습득물 정보 테이블 데이터</title>
+  <link rel="stylesheet" href="/css/board/forumDetail.css">
+  <link rel="stylesheet" href="/css/home/home.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <link href="https://cdn.datatables.net/v/dt/dt-2.1.6/datatables.min.css" rel="stylesheet">
+	<script src="https://cdn.datatables.net/v/dt/dt-2.1.6/datatables.min.js"></script>
+  <script type="text/javascript" src="/js/common/htmlComRender.js"></script>
+  
+  <style type="text/css">
+  	/* 전체 페이지의 폰트 크기를 줄이기 */
+		body {
+		    font-size: 14px; /* 기본 폰트 크기를 조금 줄임 */
+		    line-height: 1.5;
+		    font-family: Arial, sans-serif;
+		    margin: 0;
+		    padding: 0;
+		}
+		
+		/* 전체 컨테이너에 마진 및 패딩 추가 */
+		.container {
+		    max-width: 1200px; /* 페이지의 최대 너비 설정 */
+		    margin: 20px auto; /* 화면 상하 20px, 좌우는 중앙 정렬 */
+		    padding: 20px; /* 컨테이너 내부에 패딩 추가 */
+		    border: 1px solid #ddd; /* 테두리 추가 */
+		    background-color: #fff; /* 배경색 추가 */
+		    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자 추가 */
+		    border-radius: 8px; /* 모서리를 부드럽게 만듦 */
+		}
+		
+		/* DataTable 테이블의 스타일 조정 */
+		#lost_found_item {
+		    width: 100%; /* 테이블 너비는 100% */
+		    font-size: 12px; /* 테이블 내부의 폰트 크기를 줄임 */
+		    border-collapse: collapse; /* 테이블의 셀 경계가 겹치지 않도록 설정 */
+		    margin: 10px 0; /* 테이블과 다른 요소 사이에 여백을 줌 */
+		}
+		
+		#lost_found_item thead th {
+		    font-weight: bold;
+		    text-align: center; /* 헤더는 중앙 정렬 */
+		    padding: 10px;
+		    background-color: #f2f2f2; /* 헤더에 배경색 추가 */
+		    border-bottom: 2px solid #ddd; /* 테두리 추가 */
+		}
+		
+		#lost_found_item tbody td {
+		    padding: 8px; /* 각 셀의 패딩을 설정 */
+		    text-align: center;  /*데이터는 중앙 정렬  */
+		    vertical-align: middle; /* 여러 줄 데이터에 대해 수직 정렬*/
+		    border-bottom: 1px solid #ddd; /* 각 셀의 아래 테두리 추가 */
+		}
+		
+		#lost_found_item tbody td:nth-child(5) {
+		    text-align: left  !important;
+		}
+		
+		
+		/* 검색창 및 테이블 옵션 스타일 조정 */
+		.dataTables_filter label {
+		    font-size: 14px; /* 검색창 레이블 크기 조정 */
+		    float: right; /* 검색창을 우측 정렬 */
+		    margin-bottom: 10px;
+		}
+		
+		.dataTables_length label {
+		    font-size: 14px; /* 페이지당 표시 수 설정 */
+		    float: left; /* 페이지당 표시 수를 좌측 정렬 */
+		}
+		
+		/* 로그인 버튼 스타일 조정 */
+		button.login-btn {
+		    font-size: 14px;
+		    padding: 5px 15px;
+		    background-color: #ff5722;
+		    color: #fff;
+		    border: none;
+		    border-radius: 5px;
+		    cursor: pointer;
+		}
+		
+		button.login-btn:hover {
+		    background-color: #e64a19;
+		}
+		
+		/* 테이블 줄 간격 및 여백 조정 */
+		.dataTables_wrapper {
+		    padding: 10px; /* 테이블 주변의 여백 설정 */
+		}
+		
+		table.dataTable tbody tr {
+		    background-color: #fff; /* 행의 배경색 */
+		}
+		
+		table.dataTable tbody tr:nth-child(even) {
+		    background-color: #f9f9f9; /* 짝수 행 배경색 */
+		}
+		
+		table.dataTable thead {
+		    background-color: #f2f2f2; /* 헤더 배경색 */
+		}
+		
+		/* 페이지 전체에 기본 마진과 패딩 설정 */
+		html, body {
+		    margin: 0;
+		    padding: 0;
+		    background-color: #f4f4f4; /* 페이지 전체 배경색 설정 */
+		}
+		
+		
+		  	
+  </style>
+  
+  <script type="text/javascript">
+	  $(document).ready(function(){
+		  
+	  	$("#lost_found_item").DataTable({
+	  		"pageLength": 5,
+	  		"lengthMenu":[[5,10,15,20,50], [5,10,15,20,50]],
+	  		"ajax":{
+	  			"url": "/api/selectLostFoundItem",
+	  			"type":"get",
+	  			"dataType": "json",
+	  			"dataSrc": function(json){
+	  				return json;
+	  			}
+	  		},
+	  		"columns":[
+	  			 { "data": null,
+	  			 		"render": function(data, type, row, meta){
+	  			 			return meta.row + 1;
+	  			 		}
+	  			 },
+	  			 { "data": "lost_stts" },
+	  			 { "data": "reg_ymd" ,
+	  				 	"render": function(data, type, row){
+	  				 		var date = new Date(data);
+	  				 		
+	  				 		return date.toLocaleDateString('ko-KR' ,{
+	  				 			year: 'numeric',
+	  				 			month: '2-digit',
+	  				 			day: '2-digit'
+	  				 		});
+	  				 	} 
+	  			 },
+	  			 { "data": "rcv_ymd" ,
+	  				 	"render": function(data, type, row){
+	  				 		var date = new Date(data);
+	  				 		
+	  				 		return date.toLocaleDateString('ko-KR' ,{
+	  				 			year: 'numeric',
+	  				 			month: '2-digit',
+	  				 			day: '2-digit'
+	  				 		});
+	  				 	} 
+	  			 },
+	  			 { "data": "lgs_dtl_cn" },
+	  			 { "data": "cstd_plc" },
+	  			 { "data": "lost_nm" },
+	  			 { "data": "lost_knd" },
+	  			 { "data": "rcpl" }
+	  		]
+	  		, "language": {
+	  	        "lengthMenu": "_MENU_ 개씩 보기",  // "entries per page" 대신 사용할 텍스트
+	  	        "info": "총 _TOTAL_ 항목 중 _START_ 에서 _END_ 까지 표시",  // "Showing X to X of X entries"
+	  	        "infoFiltered": "(전체 _MAX_ 개 항목 중 검색된 결과)",  // "filtered from X total entries" 메시지
+	  	        "infoEmpty": "항목 없음",  // "Showing 0 to 0 of 0 entries" 메시지
+	  	        "search": "검색:",  // "Search" 텍스트 변경
+	  	        "paginate": {
+	  	            "next": "다음",  // "Next" 버튼 텍스트 변경
+	  	            "previous": "이전"  // "Previous" 버튼 텍스트 변경
+	  	        }
+	  	    }
+	  		/*
+	  		css에서 :nth로 순번 찾아서 설정해둠
+	  		, columnDefs: [
+	  			{
+	  				"target": 4,
+	  				"className": "dt-4"
+	  			}
+	  		] */
+	  	});
+	  })
+  </script>
+  
+</head>
+<body>
+	<!-- Header -->
+  <div id="header-container"></div>
+  
+  <div class="container">
+    <h1>서울시 대중교통 분실물 습득물 정보</h1>
+    <table id="lost_found_item" class="display">
+    	<thead>
+    		<tr>
+    			<th>NO</th>
+    			<th width="5%">분실물상태</th>
+    			<th width="8%">등록일자</th>
+    			<th width="8%">수령일자</th>
+    			<th>유실물상세내용</th>
+    			<th>보관장소</th>
+    			<th width="10%">분실물명</th>
+    			<th>분실물종류</th>
+    			<th>수령위치(회사)</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    	</tbody>
+    </table>
+  </div>
+  
+  <!-- Footer -->
+  <div id="footer-container"></div>
+</body>
+</html>

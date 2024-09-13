@@ -7,6 +7,32 @@
   <link rel="stylesheet" href="css/board/forumDetail.css">
   <link rel="stylesheet" href="css/home/home.css">
   <script type="text/javascript" src="js/common/htmlComRender.js"></script>
+  
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  	function postForum(){
+  		var form = $("#frm").serialize();
+  		$.ajax({
+  			url: "/forum",
+  			type: "post",
+  			dataType: "json",
+  			//contentType:"application/json; charset=utf-8",
+  			data: form,
+  			success: function(data){
+  				console.log("글쓰기 성공");
+  				window.location.href = "/forum";
+  			},
+  			error: function(e){
+  				console.log("error = " + e);
+  			}
+  		}); //ajax
+  	}
+  	
+  	function closeForm(){
+				window.location.href = "/forum";
+  	}
+  
+  </script>
 </head>
 <body>
 	<!-- Header -->
@@ -14,7 +40,8 @@
   
   <div class="form-container">
     <h1>새 글 작성</h1>
-    <form action="/forum" method="post">
+    <form id="frm">
+    <button class="close-btn" onclick="closeForm();">X</button>
       <!-- 제목 -->
       <div class="form-group">
         <label for="title">제목</label>
@@ -24,7 +51,7 @@
       <!-- 작성자 -->
       <div class="form-group">
         <label for="writer">작성자</label>
-        <input type="text" id="writeId" name="writeId" required>
+        <input type="text" id="writer" name="writer" required>
       </div>
 
       <!-- 내용 -->
@@ -35,7 +62,7 @@
 
       <!-- 버튼들 -->
       <div class="form-actions">
-        <button type="submit" class="submit-btn">작성 완료</button>
+        <button type="button" onclick="postForum();" class="submit-btn">작성 완료</button>
         <button type="reset" class="reset-btn">초기화</button>
       </div>
     </form>

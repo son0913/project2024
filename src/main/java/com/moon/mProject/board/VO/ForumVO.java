@@ -1,5 +1,6 @@
 package com.moon.mProject.board.VO;
 
+
 public class ForumVO {
 /*
     idx	int
@@ -12,10 +13,10 @@ public class ForumVO {
 	private int idx;
 	private String title;	//제목
 	private String content;	//내용
-	private String writeId;	//작성자
+	private String writer;	//작성자
 	private String regDate;	//등록일
-	private String modData;	//수정일
-
+	private String modDate;	//수정일
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -34,11 +35,11 @@ public class ForumVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getWriteId() {
-		return writeId;
+	public String getWriter() {
+		return writer;
 	}
-	public void setWriteId(String writeId) {
-		this.writeId = writeId;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	public String getRegDate() {
 		return regDate;
@@ -46,16 +47,16 @@ public class ForumVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public String getModData() {
-		return modData;
+	public String getModDate() {
+		return modDate;
 	}
-	public void setModData(String modData) {
-		this.modData = modData;
+	public void setModDate(String modDate) {
+		this.modDate = modDate;
 	}
 	
 	@Override
 	public String toString() {
-		return "ForumVO [idx=" + idx + ", title=" + title + ", content=" + content + ", writeId=" + writeId
-				+ ", regDate=" + regDate + ", modData=" + modData + "]";
+		return "ForumVO [idx=" + idx + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", regDate=" + regDate + ", modDate=" + modDate + "]";
 	}
 }

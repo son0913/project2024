@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.moon.mProject.board.mapper.BoardForumMapper">
+
+		<resultMap type="com.moon.mProject.board.VO.ForumVO" id="resultForumVO">
+			<result column="idx" property="idx"/>
+			<result column="title" property="title"/>
+			<result column="content" property="content"/>
+			<result column="writer" property="writer"/>
+			<result column="regDate" property="regDate"/>
+			<result column="modDate" property="modDate"/>
+		</resultMap>
+		
+		<!-- 새글 등록 시 idx값 구하기 -->
+		<select id="selectMaxIdx" resultType="int">
+			select if(Max(idx) >= 0 , Max(idx)+1, 0) as idx from forum
+		</select>
+		
+		<select id="selectForumList" parameterType="hashMap" resultMap="resultForumVO">
+			select idx, title, content, writer, regdate, moddate from forum 
+			order by regdate desc
+			LIMIT #{size} OFFSET #{offset}
+		</select>
+		
+		<select id="selectForumTotal" resultType="int">
+			select count(*) from forum 
+		</select>
+		
+		<select id="selectForumDetail" parameterType="int" resultMap="resultForumVO">
+			select idx, title, content, writer, regdate, moddate from forum 
+			where idx = #{idx}
+		</select>
+		
+		<!-- 새글 작성 -->
+		<insert id="insertForum" parameterType="com.moon.mProject.board.VO.ForumVO">
+			insert into forum values (#{idx}, #{title}, #{content}, #{writer}, now(), now()) 
+		</insert>
+		
+		<update id="updatetForum" parameterType="hashMap">
+			update forum set title=#{title}, content=#{content}, moddate = now() where idx = #{idx} 
+		</update>
+		
+		<update id="deleteForum" parameterType="hashMap">
+			delete from forum where idx = #{idx}
+		</update>
+		
+
+</mapper>

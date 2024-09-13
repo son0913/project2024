@@ -138,11 +138,11 @@ body {
 }
 
 /* 로그인 버튼 클릭 시 로그인 폼 표시 */
-.login-section:hover .login-form {
+/* .login-section:hover .login-form {
   display: block;
   opacity: 1;
   visibility: visible;
-}
+} */
 
 /* end - header */
 .hero {

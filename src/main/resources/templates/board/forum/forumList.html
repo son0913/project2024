@@ -3,10 +3,107 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="css/home/home.css">
-	<link rel="stylesheet" href="css/board/forumList.css">
+	<link rel="stylesheet" href= "http://localhost:8080/css/home/home.css">
+	<link rel="stylesheet" href="http://localhost:8080/css/board/forumList.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var totalPage = 0; //총 페이지 수 (ajax data length)
+			var currentPage = 1; //현재 페이지
+			var pageSize = 10; //버튼 보여줄 갯수 (10개)
+			var maxPageLinks = 10; //한번에 표시할 버튼 갯수
+			
+			//var pathPage = window.location.pathname.split('/')[3];
+			var pathPage = localStorage.getItem("page")*1;
+			
+			function loadPage(pageNumber){
+				$.ajax({
+					url:"/forumList",
+					type:"POST",
+					dataType: "json", // 서버에서 어떤 타입으로 받을 지 설정
+					//contentType:"application/json; charset=utf-8", // 서버로 데이터를 보낼 때 어떤타입으로 보낼 것인 지 지정
+					data:{"page": pageNumber, "size":pageSize}, //pageNumber = 페이지 번호, pageSize = 페이지당 게시글 수 
+					success:function(data){
+						totalPage = data.totalPage;
+						currentPage = pageNumber;
+						
+						$("#board-table-tbody").empty();
+						
+						for(var i=0; i<data.ForumVO.length; i++){
+							var tbody = "<tr>";
+//							tbody += "<td>"+ data.ForumVO[i].idx +"</td>";
+							if(pageNumber <= 1){
+								tbody += "<td>"+ ((pageNumber + i) + "") +"</td>";
+							}else{
+								tbody += "<td>"+ ((((pageNumber-1)*10) + i) + "") +"</td>";
+							}
+							tbody += "<td><a href='/forum/"+ data.ForumVO[i].idx + "'>" +data.ForumVO[i].title +"</td>";
+							tbody += "<td>"+ data.ForumVO[i].writer +"</td>";
+							tbody += "<td>"+ data.ForumVO[i].modDate +"</td>";
+							tbody += "<td>"+ 0 +"</td>";
+							$("#board-table-tbody").append(tbody);			
+						}
+						
+						updatePagination();
+						
+						localStorage.setItem("page", pageNumber);
+						localStorage.setItem("size", pageSize);
+						
+					},error:function(e){
+						console.log("error: " + e)
+					}
+				});
+			}
+			
+			function updatePagination(){
+				$("#pagination").empty();
+				
+				//한번에 보여줄 페이지 그룹의 첫번째와 마지막 페이지 계산
+				var startPage = Math.floor((currentPage -1) / maxPageLinks) * maxPageLinks +1;
+				var endPage = Math.min(startPage + maxPageLinks -1, totalPage);
+				
+				//이전 버튼
+				if(currentPage > 1){
+					$("#pagination").append('<a href="#" data-page="' + 1 + '">&laquo; 첫페이지</a>');
+					$("#pagination").append('<a href="#" data-page="' + (currentPage -1) + '">&laquo; 이전</a>');
+				}
+				
+				//페이지 번호 생성
+//				for(var i = 1; i<=totalPage; i++){
+				for(var i = startPage; i<=endPage; i++){
+					if(i == currentPage){
+						$("#pagination").append('<a href="#" class="active">' + i + '</a>'); //현재 페이지
+					}else{
+						$("#pagination").append('<a href="#" data-page="' + i + '">' + i + '</a>')
+					}
+				}
+				
+				//다음 버튼
+				if(currentPage < totalPage){
+					$("#pagination").append('<a href="#" data-page="' + (currentPage + 1) + '">다음 &raquo;</a>');
+					$("#pagination").append('<a href="#" data-page="' + totalPage + '">끝페이지 &raquo;</a>');
+				}
+				
+				//페이지 버튼 클릭시 이벤트 처리
+				$("#pagination a").click(function(e){
+					e.preventDefault();
+					var page = $(this).data('page');
+					if(page){
+						loadPage(page);
+						$("#pagination a")[page+1].attr('class', 'active');
+					}
+				});
+			}
+			
+			if(pathPage != null && pathPage != undefined){
+				loadPage(pathPage);
+			}else{
+				loadPage(1);
+			}
+		});
+	</script>
 	
- <script type="text/javascript" src="js/common/htmlComRender.js"></script>
+ <script type="text/javascript" src="http://localhost:8080/js/common/htmlComRender.js"></script>
 </head>
 <body>
 	 <!-- Header -->
@@ -17,40 +114,20 @@
 	  <table class="board-table">
 	  	<thead>
 	  		<tr>
-	  			<td>번호</td>
-	  			<td>제목</td>
-	  			<td>작성자</td>
-	  			<td>작성일</td>
-	  			<td>조회수</td>
+	  			<td width="8%">번호</td>
+	  			<td width="">제목</td>
+	  			<td width="15%">작성자</td>
+	  			<td width="15%">작성일</td>
+	  			<td width="10%">조회수</td>
 	  		</tr>
 	  	</thead>
-	  	<tbody>
-	  		<tr>
-	  			<td>1</td>
-	  			<td>첫번재 글이에요</td>
-	  			<td>user01</td>
-	  			<td>20240905</td>
-	  			<td>10</td>
-	  		</tr>
-	  		<tr>
-	  			<td>@</td>
-	  			<td>두번재 글이에요</td>
-	  			<td>user02</td>
-	  			<td>20240905</td>
-	  			<td>20</td>
-	  		</tr>
-	  	</tbody>
+	  	<tbody id="board-table-tbody"></tbody>
 	  </table>
 	  <div class="pagination-container">
-	    <div class="pagination">
-	      <a href="#">&laquo; 이전</a>
-	      <a href="#">1</a>
-	      <a href="#">2</a>
-	      <a href="#">3</a>
-	      <a href="#">다음 &raquo;</a>
-	    </div>
+	    <div class="pagination" id="pagination"></div>
+	    
 	    <div class="board-actions">
-	      <a href="forum"><button>새 글 작성</button></a>
+	      <a href="/forumForm"><button>새 글 작성</button></a>
 	    </div>
  	 </div>
   
