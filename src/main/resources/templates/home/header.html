@@ -9,7 +9,7 @@
       <li class="dropdown">
         <a href="#features">Features</a>
         <ul class="dropdown-menu">
-          <li><a id="forum" onclick="forum();" href="">Forum</a></li>
+          <li><a id="forum" onclick="forum();">Forum</a></li>
           <li><a href="/api/LostFoundItem">API</a></li>
           <li><a href="#feature3">Feature Three</a></li>
         </ul>
@@ -27,11 +27,25 @@
       <button class="login-btn" onclick="loginPop();">Login</button>
       <div class="login-form">
         <form>
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required>
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
-          <button type="submit">Submit</button>
+         <!-- 아이디 필드 -->
+        <input type="text" id="username" name="username" placeholder="아이디 입력" required>
+        <!-- 비밀번호 필드 -->
+        <input type="password" id="password" name="password" placeholder="비밀번호 입력" required>
+
+        <!-- 로그인 버튼 -->
+        <button type="submit" class="login-btn-login">로그인</button>
+				<p class="tit">아이디/비밀번호 찾기 없이 로그인하세요.</p>
+        <button type="button" class="login-btn-kakao" onclick="easyLogin('kakao')">카카오 로그인</button>
+        <button type="button" class="login-btn-naver" onclick="easyLogin('naver')"">네이버 로그인</button>
+        <!-- <button type="submit" class="login-btn-google">구글 로그인</button>
+        <button type="submit" class="login-btn-facebook">페이스북 로그인</button> -->
+        <!-- 비밀번호 잊음 링크 -->
+        <a href="#" class="forgot-password">아이디/비밀번호를 잊으셨나요?</a>
+        
+        <div class="_8icz"></div>
+
+        <!-- 새 계정 만들기 버튼 -->
+        <button type="button" class="new-account-btn">새 계정 만들기</button>
         </form>
       </div>
     </div>

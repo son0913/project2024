@@ -11,6 +11,14 @@
 			<result column="regDate" property="regDate"/>
 			<result column="modDate" property="modDate"/>
 		</resultMap>
+		<parameterMap type="com.moon.mProject.board.VO.ForumVO" id="parameterForumVO">
+			<parameter property="idx" jdbcType="INTEGER" mode="IN"/>
+			<parameter property="title" jdbcType="VARCHAR" mode="IN"/>
+			<parameter property="content" jdbcType="VARCHAR" mode="IN"/>
+			<parameter property="writer" jdbcType="VARCHAR" mode="IN"/>
+			<parameter property="regDate" jdbcType="DATE" mode="IN"/>
+			<parameter property="modDate" jdbcType="DATE" mode="IN"/>
+		</parameterMap>
 		
 		<!-- 새글 등록 시 idx값 구하기 -->
 		<select id="selectMaxIdx" resultType="int">

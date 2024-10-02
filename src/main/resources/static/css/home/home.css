@@ -83,6 +83,7 @@ body {
   position: relative;
 }
 
+/* 로그인 버튼 스타일 */
 .login-btn {
   background-color: #ff5733;
   color: white;
@@ -99,14 +100,15 @@ body {
 
 /* 로그인 폼 기본 숨김 */
 .login-form {
-  display: none;
   position: absolute;
+  display: none;
+  background-color: #ededed;
   top: 100%;
   right: 0;
-  background-color: #444;
   padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
   z-index: 1;
 }
 
@@ -116,35 +118,97 @@ body {
 }
 
 .login-form input {
-  margin: 10px 0;
-  padding: 8px;
-  font-size: 1em;
-  border: none;
-  border-radius: 5px;
+	width: 100%;
+   padding: 10px;
+   margin: 10px 0;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-size: 14px;
 }
 
 .login-form button {
-  background-color: #ff5733;
-  color: white;
-  border: none;
+  width: 100%;
   padding: 10px;
-  font-size: 1em;
-  cursor: pointer;
+  margin-top: 10px;
+  border: none;
   border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  /* background-color: #007bff; 파란색
+  color: white; */
 }
 
-.login-form button:hover {
-  background-color: #ff794f;
+/* 로그인 */
+.login-btn-login {
+	background-color: #007bff; 
+  color: white;
+}
+.login-btn-login:hover {
+	background-color: #1f8bff; 
 }
 
-/* 로그인 버튼 클릭 시 로그인 폼 표시 */
-/* .login-section:hover .login-form {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-} */
+/* 카카오 로그인 */
+.login-btn-kakao {
+	background-color: #fee500;
+  border-color: #fee500;
+  color: #000;
+}
+.login-btn-kakao:hover {
+	background-color: #fada0a;
+}
+
+/* 네이버 로그인 */
+.login-btn-naver {
+    background-color: #03c75a;
+    border-color: #03c75a;
+    color: #fff;
+}
+.login-btn-naver:hover {
+    background-color: #28a745;
+}
+
+
+._8icz{
+	align-items: center;
+  border-bottom: 1px solid #b5b7ba;
+  display: flex;
+  margin: 20px 16px;
+  text-align: center;
+}
+
+ /* 비밀번호를 잊으셨나요? 링크 스타일 */
+ .forgot-password {
+   display: block;
+   text-align: center;
+   margin-top: 10px;
+   font-size: 14px;
+   color: #007bff;
+   text-decoration: none;
+ }
+
+ .forgot-password:hover {
+   text-decoration: underline;
+ }
+ 
+/* 새 계정 만들기 버튼 스타일 */
+ .new-account-btn {
+   background-color: #28a745; /* 초록색 */
+   color: white;
+   margin-top: 20px;
+ }
+ .new-account-btn:hover {
+   background-color: #03c75a; /* 초록색 */
+ }
+
+.login-form p{
+	font-size: 14px;
+	margin-top: 25px;
+}
 
 /* end - header */
+
+
+
 .hero {
   background: url('hero-image.jpg') no-repeat center center/cover;
   color: #000;
